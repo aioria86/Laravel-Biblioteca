@@ -15,8 +15,10 @@ class CrearTablaPermisoRol extends Migration
     {
         Schema::create('permiso_rol', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedInteger('rol_id');
-            $table->unsignedInteger('permiso_id');
+            $table->bigInteger('rol_id')->unsigned();
+            $table->foreign('rol_id','fk_permisorol_rol')->references('id')->on('rol')->onDelete('restrict')->onUpdate('restrict');
+            $table->bigInteger('permiso_id')->unsigned();
+            $table->foreign('permiso_id','fk_permisorol_permiso')->references('id')->on('permiso')->onDelete('restrict')->onUpdate('restrict');
             $table->timestamps();
         });
     }

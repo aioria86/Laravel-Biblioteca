@@ -15,8 +15,10 @@ class CrearTablaUsuarioRol extends Migration
     {
         Schema::create('usuario_rol', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedInteger('rol_id');
-            $table->unsignedInteger('usuario_id');
+            $table->bigInteger('rol_id')->unsigned();
+            $table->foreign('rol_id','fk_usuariorol_rol')->references('id')->on('rol')->onDelete('restrict')->onUpdate('restrict');
+            $table->bigInteger('usuario_id')->unsigned();
+            $table->foreign('usuario_id','fk_usuariorol_usuario')->references('id')->on('usuario')->onDelete('restrict')->onUpdate('restrict');
             $table->boolean('estado');
             $table->timestamps();
         });
